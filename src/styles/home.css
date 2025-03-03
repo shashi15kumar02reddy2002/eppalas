@@ -1,0 +1,36 @@
+.home-container {
+    width: 99vw; /* ✅ Adjust if needed (Try 98vw or 102vw) */
+    height: 99vh; /* ✅ Adjust if needed (Try 95vh or 105vh) */
+    background-image: url('/public/image2.jpeg'); /* ✅ Ensure the image is in `public/` */
+    background-size: cover; /* ✅ Try changing to 'contain' or specific values */
+    background-position: center center; /* ✅ Adjust to 'top center', 'bottom center', etc. */
+    background-repeat: no-repeat; /* Prevents repeating */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* ✅ Adjust font size if text is too big or too small */
+  .home-title {
+    color: white;
+    font-size: 36px; /* Try increasing to 40px or decreasing to 30px */
+    text-shadow: 2px 2px 5px black;
+  }
+  
+  /* ✅ Adjust button position and spacing */
+  .logout-button {
+    padding: 10px 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* Try changing to 10px or 30px */
+  }
+  
+  .logout-button:hover {
+    background-color: darkred;
+  }
+  
