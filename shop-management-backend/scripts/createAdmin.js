@@ -5,15 +5,15 @@ const User = require("../models/user"); // Import the User model
 
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
-    const existingUser = await User.findOne({ username: "admin" });
+    const existingUser  = await User.findOne({ username: "admin" });
 
-    if (existingUser) {
+    if (existingUser ) {
       console.log("✅ Admin user already exists.");
     } else {
       const hashedPassword = bcrypt.hashSync("password123", 10);
-      const newUser = new User({ username: "admin", password: hashedPassword });
+      const newUser  = new User({ username: "admin", password: hashedPassword });
 
-      await newUser.save();
+      await newUser .save();
       console.log("✅ Admin user created: Username: admin, Password: password123");
     }
 
