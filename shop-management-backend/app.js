@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://your-frontend.netlify.app'], // Allow frontend access
+  origin: ['http://localhost:3000', 'https://eppalas.netlify.app/login'], // Allow frontend access
   credentials: true
 }));
 app.use(express.json());
