@@ -14,7 +14,7 @@ const storedPassword = bcrypt.hashSync('password123', 10);
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-
+    
     // Find user in the database
     const user = await User.findOne({ username });
 
@@ -33,6 +33,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     res.json({ token });
+
   } catch (error) {
     console.error("Login Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
