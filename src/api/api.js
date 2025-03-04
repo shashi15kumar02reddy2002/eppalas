@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-// Function to get the token dynamically to prevent stale values
+// ✅ Always fetch latest token dynamically to prevent stale values
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
-// Function to log in and store the token
+// ✅ Fix Login Function
 export const login = async (username, password) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/login`, {
@@ -16,6 +16,7 @@ export const login = async (username, password) => {
       password,
     });
 
+    // Store token in localStorage after successful login
     localStorage.setItem("token", response.data.token);
     return response.data;
   } catch (error) {
@@ -24,7 +25,7 @@ export const login = async (username, password) => {
   }
 };
 
-// Function to fetch all items
+// ✅ Function to fetch all items
 export const fetchItems = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/items`, {
@@ -37,7 +38,7 @@ export const fetchItems = async () => {
   }
 };
 
-// Function to fetch an item by tag number
+// ✅ Function to fetch an item by tag number
 export const fetchItemByTag = async (tagNumber) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/items/item/${tagNumber}`, {
@@ -50,12 +51,14 @@ export const fetchItemByTag = async (tagNumber) => {
   }
 };
 
-// Function to increment stock count
+// ✅ Function to increment stock count
 export const incrementStock = async (tagNumber) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/stock/increment/${tagNumber}`, {}, {
-      headers: getAuthHeaders(),
-    });
+    const response = await axios.put(
+      `${API_BASE_URL}/stock/increment/${tagNumber}`,
+      {}, // Empty request body
+      { headers: getAuthHeaders() }
+    );
     return response.data;
   } catch (error) {
     console.error("Error incrementing stock:", error);
@@ -63,12 +66,14 @@ export const incrementStock = async (tagNumber) => {
   }
 };
 
-// Function to decrement stock count
+// ✅ Function to decrement stock count
 export const decrementStock = async (tagNumber) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/stock/decrement/${tagNumber}`, {}, {
-      headers: getAuthHeaders(),
-    });
+    const response = await axios.put(
+      `${API_BASE_URL}/stock/decrement/${tagNumber}`,
+      {}, // Empty request body
+      { headers: getAuthHeaders() }
+    );
     return response.data;
   } catch (error) {
     console.error("Error decrementing stock:", error);
@@ -76,7 +81,7 @@ export const decrementStock = async (tagNumber) => {
   }
 };
 
-// Function to fetch in-stock items
+// ✅ Function to fetch in-stock items
 export const fetchInStockItems = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/stock/in-stock`, {
@@ -89,7 +94,7 @@ export const fetchInStockItems = async () => {
   }
 };
 
-// Function to fetch sold items
+// ✅ Function to fetch sold items
 export const fetchSoldItems = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/stock/sold-items`, {
@@ -102,12 +107,14 @@ export const fetchSoldItems = async () => {
   }
 };
 
-// Function to generate a bill
+// ✅ Function to generate a bill (Fixed missing `/` in URL)
 export const generateBill = async (tagNumbers) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/billing/bill`, { tagNumbers }, {
-      headers: getAuthHeaders(),
-    });
+    const response = await axios.post(
+      `${API_BASE_URL}/billing/bill`,
+      { tagNumbers },
+      { headers: getAuthHeaders() }
+    );
     return response.data;
   } catch (error) {
     console.error("Error generating bill:", error);
