@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 function StockCheckTable() {
   const [inStockItems, setInStockItems] = useState([]);
   const [soldItems, setSoldItems] = useState([]);
@@ -11,7 +12,7 @@ function StockCheckTable() {
   // Fetch in-stock items
   const fetchInStockItems = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/stock/in-stock');
+      const response = await axios.get(`${API_BASE_URL}/stock/in-stock`);
       return response.data;
     } catch (err) {
       throw new Error('Failed to fetch in-stock items');
@@ -21,7 +22,7 @@ function StockCheckTable() {
   // Fetch sold items
   const fetchSoldItems = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/stock/sold-items');
+      const response = await axios.get(`${API_BASE_URL}/stock/sold-items`);
       return response.data;
     } catch (err) {
       throw new Error('Failed to fetch sold items');

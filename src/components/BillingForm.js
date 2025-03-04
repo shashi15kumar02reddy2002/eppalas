@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 function BillingForm() {
   const [tagNumber, setTagNumber] = useState('');
@@ -21,7 +22,7 @@ function BillingForm() {
     try {
       console.log("Fetching item:", tagNumber);
 
-      const response = await axios.get(`http://localhost:5000/items/item/${String(tagNumber)}`); // Ensure correct API URL
+      const response = await axios.get(`${API_BASE_URL}/items/item/${String(tagNumber)}`); // Ensure correct API URL
       console.log("API Response:", response.data);
 
       const item = response.data;
@@ -63,7 +64,7 @@ function BillingForm() {
       const tagNumbers = billItems.map(item => item.tagNumber);
       console.log("Selling items:", tagNumbers);
 
-      const response = await axios.post(`http://localhost:5000/stock/sell-multiple`, { tagNumbers });
+      const response = await axios.post(`${API_BASE_URL}/stock/sell-multiple`, { tagNumbers });
       console.log("Sell Response:", response.data);
 
       alert('All items sold successfully!');

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 function More() {
   const [formData, setFormData] = useState({
     tagNumber: '',
@@ -24,7 +25,7 @@ function More() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/items', formData);
+      const response = await axios.post(`${API_BASE_URL}/items`, formData);
       alert('Item added successfully!');
       console.log('Added item:', response.data);
       // Clear the form after successful submission

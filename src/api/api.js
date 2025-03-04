@@ -2,10 +2,12 @@ import axios from 'axios';
 
 const token = localStorage.getItem('token');
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 // Function to fetch all items
 export const fetchItems = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/items', {
+    const response = await axios.get(`${API_BASE_URL}/items`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -18,7 +20,7 @@ export const fetchItems = async () => {
 // Function to fetch an item by tag number
 export const fetchItemByTag = async (tagNumber) => {
   try {
-    const response = await axios.get(`http://localhost:5000/items/item/${tagNumber}`, {
+    const response = await axios.get(`${API_BASE_URL}/items/item/${tagNumber}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -31,7 +33,7 @@ export const fetchItemByTag = async (tagNumber) => {
 // Function to increment stock count
 export const incrementStock = async (tagNumber) => {
   try {
-    const response = await axios.put(`http://localhost:5000/stock/increment/${tagNumber}`, {
+    const response = await axios.put(`${API_BASE_URL}/stock/increment/${tagNumber}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -44,7 +46,7 @@ export const incrementStock = async (tagNumber) => {
 // Function to decrement stock count
 export const decrementStock = async (tagNumber) => {
   try {
-    const response = await axios.put(`http://localhost:5000/stock/decrement/${tagNumber}`, {
+    const response = await axios.put(`${API_BASE_URL}/stock/decrement/${tagNumber}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -57,7 +59,7 @@ export const decrementStock = async (tagNumber) => {
 // Function to fetch in-stock items
 export const fetchInStockItems = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/stock/in-stock', {
+    const response = await axios.get(`${API_BASE_URL}/stock/in-stock`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -70,7 +72,7 @@ export const fetchInStockItems = async () => {
 // Function to fetch sold items
 export const fetchSoldItems = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/stock/sold-items', {
+    const response = await axios.get(`${API_BASE_URL}/stock/sold-items`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -83,7 +85,7 @@ export const fetchSoldItems = async () => {
 // Function to generate a bill
 export const generateBill = async (tagNumbers) => {
   try {
-    const response = await axios.post('http://localhost:5000/billing/bill', { tagNumbers }, {
+    const response = await axios.post(`${API_BASE_URL}billing/bill`, { tagNumbers }, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
