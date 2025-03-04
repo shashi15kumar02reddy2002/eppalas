@@ -11,6 +11,8 @@ function Login({ setIsAuthenticated }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log("Username:", username);
+    console.log("Password:", password);
 
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/login`, { username, password });
