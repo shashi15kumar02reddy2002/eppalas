@@ -7,17 +7,18 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/login`, { username, password });
-      localStorage.setItem('token', response.data.token);
-      setIsAuthenticated(true);
-      navigate('/home');
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+        username,
+        password,
+      });
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      window.location.href = '/';
     } catch (error) {
-      console.error("Login error:", error); // Log the full error
-      alert('Invalid credentials');
+      setError(error.response.data.message);
     }
   };
 
