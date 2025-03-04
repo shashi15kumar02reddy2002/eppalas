@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://eppalas.netlify.app/login'], // Allow frontend access
+  origin: ['http://localhost:3000', 'https://eppalas.netlify.app'], // Allow frontend access
   credentials: true
 }));
 app.use(express.json());
@@ -25,10 +25,13 @@ app.use("/stock", stockRoutes);
 app.use("/billing", billingRoutes);
 app.use("/auth", authRoutes);
 
-// Store hashed password in a variable
-const storedPassword = bcrypt.hashSync("password123", 10);
+// ✅ Default Route for Root URL (Fix "Cannot GET /" error)
+app.get("/", (req, res) => {
+  res.send("Welcome to the Eppalas Shop API! 🎉");
+});
 
-// Login Route
+// ✅ Login Route
+const storedPassword = bcrypt.hashSync("password123", 10);
 app.post("/login", async (req, res) => {
   try {
     const { password } = req.body;
@@ -42,7 +45,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Logout Route
+// ✅ Logout Route
 app.post("/logout", async (req, res) => {
   try {
     res.json({ message: "Logout successful" });
@@ -51,7 +54,7 @@ app.post("/logout", async (req, res) => {
   }
 });
 
-// Home Page Route
+// ✅ Home Route
 app.get("/home", async (req, res) => {
   try {
     res.json({ message: "Welcome to the home page" });
@@ -71,7 +74,7 @@ mongoose.connect(process.env.MONGO_URI, {
   });
 
 // Start the Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
